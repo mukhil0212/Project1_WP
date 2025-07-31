@@ -19,6 +19,11 @@ return [
             'text' => 'Run back to the forest entrance',
             'next_scene' => 'start',
             'hp_change' => -5
+        ],
+        'fight' => [
+            'text' => 'Fight the dark creatures lurking nearby',
+            'next_scene' => 'battle_victory',
+            'hp_change' => -15
         ]
     ]
 ];

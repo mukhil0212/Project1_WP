@@ -162,18 +162,7 @@ class GameEngine
         return $_SESSION['game'] ?? [];
     }
     
-    /**
-     * Check if game is over
-     */
-    public function isGameOver(): bool 
-    {
-        if (!isset($_SESSION['game'])) {
-            return false;
-        }
-        
-        $currentScene = $_SESSION['game']['current_scene'];
-        return in_array($currentScene, ['victory', 'defeat', 'death']);
-    }
+
     
     /**
      * End game and save to leaderboard
@@ -214,13 +203,62 @@ class GameEngine
     /**
      * Clear game session
      */
-    private function clearSession(): void 
+    private function clearSession(): void
     {
         unset($_SESSION['game']);
-        
+
         // Delete from database
         $stmt = $this->db->prepare('DELETE FROM game_sessions WHERE user_id = ?');
         $stmt->execute([$this->userId]);
+    }
+
+    /**
+     * Get current scene data
+     */
+    public function getCurrentScene(): array
+    {
+        if (!isset($_SESSION['game'])) {
+            throw new \Exception('No active game session');
+        }
+
+        return $this->loadScene($_SESSION['game']['current_scene']);
+    }
+
+    /**
+     * Get game statistics
+     */
+    public function getGameStats(): array
+    {
+        if (!isset($_SESSION['game'])) {
+            throw new \Exception('No active game session');
+        }
+
+        return [
+            'hp' => $_SESSION['game']['hp'],
+            'inventory' => $_SESSION['game']['inventory'],
+            'choices_count' => count($_SESSION['game']['choices_made']),
+            'current_scene' => $_SESSION['game']['current_scene'],
+            'start_time' => $_SESSION['game']['start_time']
+        ];
+    }
+
+    /**
+     * Check if game is over
+     */
+    public function isGameOver(): bool
+    {
+        if (!isset($_SESSION['game'])) {
+            return false;
+        }
+
+        // Game over if HP is 0 or less
+        if ($_SESSION['game']['hp'] <= 0) {
+            return true;
+        }
+
+        // Game over if reached an ending scene
+        $endingScenes = ['victory', 'defeat', 'peaceful_rest'];
+        return in_array($_SESSION['game']['current_scene'], $endingScenes);
     }
 }
 ?>

@@ -19,6 +19,12 @@ return [
             'next_scene' => 'water_spirit',
             'hp_change' => 10,
             'add_item' => 'Water\'s Blessing'
+        ],
+        'explore' => [
+            'text' => 'Explore the riverbank for secrets',
+            'next_scene' => 'hidden_cave',
+            'hp_change' => 0,
+            'add_item' => 'Ancient Map'
         ]
     ]
 ];
