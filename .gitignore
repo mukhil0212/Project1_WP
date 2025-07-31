@@ -1,0 +1,29 @@
+# Database files
+data/
+*.db
+*.sqlite
+
+# PHP
+vendor/
+composer.lock
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Cache
+cache/
+tmp/
+
+# Environment files
+.env
+.env.local
