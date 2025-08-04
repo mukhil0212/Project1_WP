@@ -14,6 +14,13 @@ if (!$auth->isLoggedIn()) {
     exit;
 }
 
+// Handle logout request
+if (isset($_GET['logout']) && $_GET['logout'] == '1') {
+    $auth->logout();
+    header('Location: login.php');
+    exit;
+}
+
 $gameEngine = new GameEngine($auth->getCurrentUserId());
 $message = '';
 $messageType = '';

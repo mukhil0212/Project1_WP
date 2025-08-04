@@ -71,6 +71,12 @@ if ($isLoggedIn) {
                             <p>See how other adventurers have fared.</p>
                             <a href="leaderboard.php" class="btn btn-tertiary">View Rankings</a>
                         </div>
+                        
+                        <div class="action-card">
+                            <h3>Scrum Methodology</h3>
+                            <p>Learn about our agile development process.</p>
+                            <a href="scrum.php" class="btn btn-tertiary">View Process</a>
+                        </div>
                     </div>
                     
                     <div class="user-menu">
@@ -103,6 +109,7 @@ if ($isLoggedIn) {
                         <a href="login.php" class="btn btn-primary">Login</a>
                         <a href="register.php" class="btn btn-secondary">Create Account</a>
                         <a href="leaderboard.php" class="btn btn-tertiary">View Leaderboard</a>
+                        <a href="scrum.php" class="btn btn-tertiary">Scrum Process</a>
                     </div>
                 </div>
             <?php endif; ?>
